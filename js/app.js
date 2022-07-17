@@ -4,7 +4,7 @@ const loadButton = () => {
     inputField.value = '';
     console.log(inputText)
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=iphone`
+    const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data.data))
@@ -23,13 +23,32 @@ const displayPhone = (phones) => {
         <div class="card" style="width: 18rem;">
             <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+             <h5>Name: ${phone.phone_name}</h5>
+                <p class="card-text">Brand: ${phone.brand}</p>
             </div>
+            <button onclick="exploreButton('${phone.slug}')" class="btn btn-primary">Explore</button>
         </div>
         `
         sectionContainer.appendChild(div)
         console.log(phone)
     }
 
+}
+
+const exploreButton = (info) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${info}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayExplore(data.data))
+    // console.log(info)
+}
+
+const displayExplore = (details) => {
+    const exploreContainer = document.getElementById('explore-container');
+    const div = document.createElement('div')
+    div.innerHTML = `
+    <img src="${details.image}" class="card-img-top" alt="...">
+    `
+    exploreContainer.appendChild(div)
+    console.log(details.image)
 }
