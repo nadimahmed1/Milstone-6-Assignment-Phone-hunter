@@ -2,7 +2,7 @@ const loadButton = () => {
     const inputField = document.getElementById('input-field');
     const inputText = inputField.value;
     inputField.value = '';
-    console.log(inputText)
+    // console.log(inputText)
 
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputText}`
     fetch(url)
@@ -47,8 +47,15 @@ const displayExplore = (details) => {
     const exploreContainer = document.getElementById('explore-container');
     const div = document.createElement('div')
     div.innerHTML = `
-    <img src="${details.image}" class="card-img-top" alt="...">
+    <img class="w-25" src="${details.image}" class="card-img-top" alt="...">
+    <h6>${details.releaseDate}</h6>
+    <p>Storage: ${details.mainFeatures.storage}
+    </p>
+    <p> displaySize: ${details.mainFeatures.displaySize}</p>
+    <p> ChipSet: ${details.mainFeatures.chipSet}</p>
+    <p> Memory: ${details.mainFeatures.memory}</p>
+    
     `
     exploreContainer.appendChild(div)
-    console.log(details.image)
+    console.log(details.mainFeatures)
 }
